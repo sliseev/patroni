@@ -430,6 +430,8 @@ class CitusHandler(Citus, AbstractMPPHandler, Thread):
             lambda el: el and el != 'citus',
             [p.strip() for p in parameters.get('shared_preload_libraries', '').split(',')]))
         parameters['shared_preload_libraries'] = ','.join(['citus'] + shared_preload_libraries)
+        if 'pg_stat_statements' not in parameters.get('shared_preload_libraries'):
+            parameters['shared_preload_libraries'] = parameters.get('shared_preload_libraries') + ',pg_stat_statements'
 
         # if not explicitly set Citus overrides max_prepared_transactions to max_connections*2
         if parameters['max_prepared_transactions'] == 0:
