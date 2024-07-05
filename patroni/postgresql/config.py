@@ -320,7 +320,7 @@ class ConfigHandler(object):
         'wal_keep_segments': (8, IntValidator(min=1), 90100),
         'wal_keep_size': ('128MB', IntValidator(min=16, base_unit='MB'), 130000),
         'max_prepared_transactions': (0, IntValidator(min=0), 90100),
-        'max_locks_per_transaction': (64, IntValidator(min=32), 90100),
+        'max_locks_per_transaction': (16384, IntValidator(min=32), 90100),
         'track_commit_timestamp': ('off', _bool_validator, 90500),
         'max_replication_slots': (10, IntValidator(min=4), 90400),
         'max_worker_processes': (8, IntValidator(min=2), 90400),
